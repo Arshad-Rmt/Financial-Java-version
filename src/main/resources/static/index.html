@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinInsight — Financial Health Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- Header: Logo (left) + Theme Toggle (top-right, non-overlapping) -->
+    <header class="topbar">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="14" width="5" height="12" rx="2.5" fill="url(#logo-grad-1)"/>
+          <rect x="11" y="8" width="5" height="18" rx="2.5" fill="url(#logo-grad-2)"/>
+          <rect x="20" y="2" width="5" height="24" rx="2.5" fill="url(#logo-grad-3)"/>
+          <defs>
+            <linearGradient id="logo-grad-1" x1="4.5" y1="14" x2="4.5" y2="26" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#38bdf8"/>
+              <stop offset="1" stop-color="#2563eb"/>
+            </linearGradient>
+            <linearGradient id="logo-grad-2" x1="13.5" y1="8" x2="13.5" y2="26" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#60a5fa"/>
+              <stop offset="1" stop-color="#1d4ed8"/>
+            </linearGradient>
+            <linearGradient id="logo-grad-3" x1="22.5" y1="2" x2="22.5" y2="26" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#818cf8"/>
+              <stop offset="1" stop-color="#3b82f6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">FinInsight</span>
+      </div>
+
+      <div class="theme-switcher-pill" id="theme-toggle" role="group" aria-label="Toggle theme">
+        <button type="button" class="theme-pill-btn" id="btn-dark-theme" data-mode="dark" aria-label="Dark theme" title="Dark theme">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <button type="button" class="theme-pill-btn" id="btn-light-theme" data-mode="light" aria-label="Light theme" title="Light theme">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+
+      <!-- Page Intro -->
+      <section class="hero-banner">
+        <div class="hero-text">
+          <span class="step-eyebrow">Step-by-step analysis</span>
+          <h1 class="page-title">Financial Health Analyzer</h1>
+          <p class="page-subtitle">Enter a company's financial details to get an AI-powered distress prediction.</p>
+        </div>
+      </section>
+
+      <!-- STEP 1: Company Financial Details -->
+      <section class="panel-card form-panel" id="section-form">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="step-number">1</span>
+            <h2>Company Financial Details</h2>
+          </div>
+        </div>
+
+        <form id="financial-form" class="financial-form">
+          <div class="form-grid">
+            <div class="form-row">
+              <label for="input-roa">ROA Before Interest &amp; Depreciation</label>
+              <input type="number" step="any" id="input-roa" name="roaBeforeInterestAndDepreciationBeforeInterest" value="-0.25">
+            </div>
+
+            <div class="form-row">
+              <label for="input-debt">Debt Ratio</label>
+              <input type="number" step="any" id="input-debt" name="debtRatio" value="0.94">
+            </div>
+
+            <div class="form-row">
+              <label for="input-netflag">Net Income Flag</label>
+              <input type="number" step="any" id="input-netflag" name="netIncomeFlag" value="0">
+            </div>
+
+            <div class="form-row">
+              <label for="input-current">Current Ratio</label>
+              <input type="number" step="any" id="input-current" name="currentRatio" value="0.45">
+            </div>
+
+            <div class="form-row">
+              <label for="input-opmargin">Operating Gross Margin</label>
+              <input type="number" step="any" id="input-opmargin" name="operatingGrossMargin" value="0.06">
+            </div>
+
+            <div class="form-row">
+              <label for="input-interestcov">Interest Coverage Ratio</label>
+              <input type="number" step="any" id="input-interestcov" name="interestCoverageRatio" value="-1.0">
+            </div>
+
+            <div class="form-row">
+              <label for="input-equityliab">Equity to Liability</label>
+              <input type="number" step="any" id="input-equityliab" name="equityToLiability" value="0.18">
+            </div>
+
+            <div class="form-row">
+              <label for="input-netassets">Net Income to Total Assets</label>
+              <input type="number" step="any" id="input-netassets" name="netIncomeToTotalAssets" value="-0.11">
+            </div>
+
+            <div class="form-row">
+              <label for="input-cashflow">Cash Flow Per Share</label>
+              <input type="number" step="any" id="input-cashflow" name="cashFlowPerShare" value="-3.2">
+            </div>
+          </div>
+
+          <button type="button" id="btn-analyze" class="btn-primary">
+            <span id="btn-analyze-label">Analyze Company</span>
+            <span class="btn-arrow" id="btn-analyze-arrow">→</span>
+          </button>
+          <p class="form-error" id="form-error" role="alert" hidden></p>
+        </form>
+      </section>
+
+      <!-- STEP 2: Final Prediction Result -->
+      <section class="panel-card prediction-card" id="section-prediction">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="step-number">2</span>
+            <h2>Final Prediction Result</h2>
+          </div>
+        </div>
+
+        <div class="prediction-body">
+          <div class="prediction-status-box">
+            <div class="alert-icon-square" id="prediction-icon-box">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L1 21h22L12 2zm0 3.5l8.5 14.5H3.5L12 5.5z"/>
+                <path d="M11 10h2v5h-2zm0 6h2v2h-2z"/>
+              </svg>
+            </div>
+            <div class="prediction-status-text">
+              <h3 class="status-heading" id="prediction-status-label">Awaiting Analysis</h3>
+              <p class="status-description" id="prediction-status-desc">Fill in the financial details above and click "Analyze Company" to get a prediction.</p>
+            </div>
+          </div>
+
+          <div class="prediction-gauge-box">
+            <div class="gauge-container">
+              <svg class="gauge-svg" viewBox="0 0 120 120">
+                <circle class="gauge-bg-track" cx="60" cy="60" r="50"></circle>
+                <circle class="gauge-progress-bar" id="gauge-progress" cx="60" cy="60" r="50" style="stroke-dashoffset: 314.159;"></circle>
+              </svg>
+              <div class="gauge-center-text">
+                <span class="gauge-percentage" id="gauge-value">—</span>
+              </div>
+            </div>
+            <span class="gauge-label">Probability of Distress</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3: Key Weak Points -->
+      <section class="panel-card diagnostics-card weak-points-card" id="section-weak-points">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="step-number">3</span>
+            <h2>Key Weak Points</h2>
+          </div>
+          <span class="count-pill pill-red" id="weak-points-count">0</span>
+        </div>
+
+        <ul class="diagnostics-list list-red" id="weak-points-list">
+          <li class="empty-item">Run an analysis to see identified weak points.</li>
+        </ul>
+      </section>
+
+      <!-- STEP 4: Recommendations -->
+      <section class="panel-card diagnostics-card recommendations-card" id="section-recommendations">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="step-number">4</span>
+            <h2>Recommendations</h2>
+          </div>
+          <span class="count-pill pill-green" id="recommendations-count">0</span>
+        </div>
+
+        <ul class="diagnostics-list list-green" id="recommendations-list">
+          <li class="empty-item">Run an analysis to see recommendations.</li>
+        </ul>
+      </section>
+
+      <!-- STEP 5: Financial Metrics Chart -->
+      <section class="panel-card chart-panel" id="section-chart">
+        <div class="panel-header chart-header">
+          <div class="panel-title">
+            <span class="step-number">5</span>
+            <h2>Financial Metrics Chart</h2>
+          </div>
+          <div class="chart-legend">
+            <span class="legend-item">
+              <span class="legend-dot dot-cyan"></span>
+              <span>Input Value</span>
+            </span>
+            <span class="legend-item">
+              <span class="legend-dot dot-amber dot-dashed"></span>
+              <span>Healthy Threshold</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <svg id="metrics-chart" class="metrics-svg" viewBox="0 0 540 180" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chartAreaGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.0"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Horizontal Grid Lines -->
+            <g class="chart-grid">
+              <line x1="40" y1="20" x2="520" y2="20"></line>
+              <line x1="40" y1="50" x2="520" y2="50"></line>
+              <line x1="40" y1="80" x2="520" y2="80"></line>
+              <line x1="40" y1="110" x2="520" y2="110"></line>
+              <line x1="40" y1="140" x2="520" y2="140"></line>
+            </g>
+
+            <!-- Y-Axis Ticks -->
+            <g class="chart-y-labels">
+              <text x="32" y="24">4</text>
+              <text x="32" y="54">2</text>
+              <text x="32" y="84">0</text>
+              <text x="32" y="114">-2</text>
+              <text x="32" y="144">-4</text>
+            </g>
+
+            <!-- Area Fill (Input Value only) -->
+            <path id="chart-area-path" class="chart-area" d="" fill="url(#chartAreaGradient)"/>
+
+            <!-- Healthy Threshold Curve (Amber Dashed — diagnostic reference, NOT an ideal/best value) -->
+            <path id="chart-threshold-path" class="chart-line-threshold" d="" />
+
+            <!-- Diagnostic Reference Points for Healthy Threshold -->
+            <g class="chart-threshold-points" id="chart-threshold-points-group"></g>
+
+            <!-- Input Value Curve (Cyan Smooth Solid) -->
+            <path id="chart-input-path" class="chart-line-input" d="" />
+
+            <!-- Data Points for Input Values -->
+            <g class="chart-points" id="chart-points-group"></g>
+
+            <!-- X-Axis Labels -->
+            <g class="chart-x-labels">
+              <text x="50" y="165">ROA</text>
+              <text x="105" y="165">Debt</text>
+              <text x="160" y="165">Net</text>
+              <text x="215" y="165">Current</text>
+              <text x="270" y="165">Operating</text>
+              <text x="325" y="165">Interest</text>
+              <text x="380" y="165">Equity</text>
+              <text x="435" y="165">Net</text>
+              <text x="490" y="165">Cash</text>
+            </g>
+          </svg>
+        </div>
+
+        <p class="chart-disclaimer">
+          "Healthy Threshold" marks the diagnostic reference point used to flag each metric as a weak point — it is a minimum baseline, not a recommended, ideal, or best-case value.
+        </p>
+      </section>
+
+      <!-- Footer -->
+      <footer class="dashboard-footer">
+        <div class="footer-left">
+          <strong>Financial Health Analyzer</strong>
+          <span>Powered by Machine Learning | Built with Spring Boot</span>
+        </div>
+        <span class="footer-copyright">© 2026 Financial Health Analyzer. All rights reserved.</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

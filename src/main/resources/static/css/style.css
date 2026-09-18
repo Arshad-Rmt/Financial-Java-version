@@ -1,0 +1,911 @@
+/* ===================================================================
+   FinInsight — Financial Health Analyzer Dashboard Stylesheet
+   Supports Dark Theme & Default/Light Theme with smooth transitions
+   =================================================================== */
+
+:root {
+  /* Fonts */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Global Brand Constants */
+  --blue-primary: #2563eb;
+  --blue-hover: #1d4ed8;
+  --blue-glow: rgba(37, 99, 235, 0.35);
+  --cyan-accent: #38bdf8;
+  --green-accent: #10b981;
+  --green-glow: rgba(16, 185, 129, 0.35);
+  --red-accent: #ef4444;
+  --red-glow: rgba(239, 68, 68, 0.35);
+  --amber-accent: #f59e0b;
+  --purple-accent: #a855f7;
+  --neutral-accent: #64748b;
+
+  /* Transitions */
+  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-card: 16px;
+  --radius-sub: 10px;
+}
+
+/* ==========================================
+   Dark Theme (Default)
+   ========================================== */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-page: #080c15;
+  --bg-topbar: rgba(8, 12, 21, 0.85);
+  --bg-card: #101625;
+  --bg-card-hover: #141c2e;
+  --bg-input: #0b0f19;
+  --bg-input-focus: #0e1422;
+
+  --border-color: rgba(255, 255, 255, 0.07);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-active: #2563eb;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #0f172a;
+
+  --kpi-blue-bg: rgba(37, 99, 235, 0.16);
+  --kpi-red-bg: rgba(239, 68, 68, 0.16);
+  --kpi-green-bg: rgba(16, 185, 129, 0.16);
+  --kpi-amber-bg: rgba(245, 158, 11, 0.16);
+  --kpi-neutral-bg: rgba(100, 116, 139, 0.16);
+
+  --chart-grid: rgba(255, 255, 255, 0.06);
+  --chart-text: #64748b;
+  --gauge-track: #1e293b;
+
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  --shadow-float: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
+
+  --switcher-bg: rgba(15, 23, 42, 0.6);
+  --switcher-border: rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================================
+   Light Theme
+   ========================================== */
+[data-theme="light"] {
+  color-scheme: light;
+  --bg-page: #f5f7fc;
+  --bg-topbar: rgba(245, 247, 252, 0.85);
+  --bg-card: #ffffff;
+  --bg-card-hover: #fafbfe;
+  --bg-input: #f8fafc;
+  --bg-input-focus: #ffffff;
+
+  --border-color: #e2e8f0;
+  --border-subtle: #f1f5f9;
+  --border-active: #2563eb;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --text-inverse: #ffffff;
+
+  --kpi-blue-bg: #eff6ff;
+  --kpi-red-bg: #fef2f2;
+  --kpi-green-bg: #ecfdf5;
+  --kpi-amber-bg: #fffbeb;
+  --kpi-neutral-bg: #f1f5f9;
+
+  --chart-grid: #e2e8f0;
+  --chart-text: #94a3b8;
+  --gauge-track: #e2e8f0;
+
+  --shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.03);
+  --shadow-float: 0 12px 30px -4px rgba(15, 23, 42, 0.12);
+
+  --switcher-bg: rgba(255, 255, 255, 0.7);
+  --switcher-border: #cbd5e1;
+}
+
+/* ==========================================
+   Base & Reset
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button, input {
+  font-family: inherit;
+}
+
+/* ==========================================
+   App Shell
+   ========================================== */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ==========================================
+   Header / Topbar
+   (Logo left, Theme toggle top-right — never overlaps content)
+   ========================================== */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 36px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-topbar);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+/* ==========================================
+   Dashboard Content — single-column step flow
+   ========================================== */
+.dashboard-content {
+  flex: 1;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Page Intro */
+.hero-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.step-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue-primary);
+}
+
+.page-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+.page-subtitle {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================
+   Shared Panel Card
+   ========================================== */
+.panel-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  padding: 22px 24px;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.panel-title h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.step-number {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--kpi-blue-bg);
+  color: var(--blue-primary);
+  font-size: 0.82rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================
+   STEP 1: Financial Details Form
+   ========================================== */
+.financial-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 24px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.form-row label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.form-row input {
+  width: 100px;
+  padding: 7px 9px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: right;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.form-row input:focus {
+  border-color: var(--border-active);
+  background-color: var(--bg-input-focus);
+  box-shadow: 0 0 0 2px var(--blue-glow);
+}
+
+/* --- Empty-start form: placeholder / example hints -----------------
+   The 9 fields now load empty, so the placeholder carries the example
+   value. It is styled clearly as a hint (muted, lighter, non-bold) so it
+   can never be mistaken for a real pre-filled value. */
+.form-row input::placeholder {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.78rem;
+  opacity: 0.85;
+}
+
+.form-row input::-webkit-input-placeholder {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.78rem;
+}
+
+/* Hide the hint while typing in the field, so it never competes with input. */
+.form-row input:focus::placeholder {
+  opacity: 0.35;
+}
+
+/* An untouched (empty) field sits visually quieter than a filled one — the
+   border only "activates" once the user has actually entered a value. */
+.form-row input:placeholder-shown {
+  border-style: dashed;
+  border-color: var(--border-subtle);
+}
+
+.form-row input:not(:placeholder-shown) {
+  border-style: solid;
+  border-color: var(--border-color);
+}
+
+.form-row input:placeholder-shown:focus {
+  border-style: solid;
+  border-color: var(--border-active);
+}
+
+.btn-primary {
+  margin-top: 4px;
+  padding: 13px 18px;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border: none;
+  border-radius: var(--radius-sub);
+  color: #ffffff;
+  font-size: 0.94rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px var(--blue-glow);
+  transition: var(--transition-smooth);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px var(--blue-glow);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-arrow {
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:hover:not(:disabled) .btn-arrow {
+  transform: translateX(3px);
+}
+
+.form-error {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--red-accent);
+  background: var(--kpi-red-bg);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-sub);
+  padding: 10px 14px;
+}
+
+/* ==========================================
+   STEP 2: Prediction Result
+   ========================================== */
+.prediction-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.prediction-status-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.alert-icon-square {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: var(--kpi-neutral-bg);
+  color: var(--neutral-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition-smooth);
+}
+
+.alert-icon-square svg {
+  width: 26px;
+  height: 26px;
+}
+
+.alert-icon-square.status-danger {
+  background-color: var(--kpi-red-bg);
+  color: var(--red-accent);
+}
+
+.alert-icon-square.status-safe {
+  background-color: var(--kpi-green-bg);
+  color: var(--green-accent);
+}
+
+/* Transient "Analyzing…" state while POST /api/financial/analyze is in flight.
+   Applied by resetPredictionSection('loading'); no colour verdict is implied. */
+.alert-icon-square.is-loading {
+  background-color: var(--kpi-blue-bg);
+  color: var(--blue-primary);
+  animation: fininsight-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes fininsight-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+.status-heading {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 3px;
+  color: var(--text-primary);
+}
+
+.text-red { color: var(--red-accent); }
+.text-green { color: var(--green-accent); }
+
+.status-description {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  max-width: 280px;
+  line-height: 1.4;
+}
+
+/* Circular Gauge Progress */
+.prediction-gauge-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.gauge-container {
+  position: relative;
+  width: 96px;
+  height: 96px;
+}
+
+.gauge-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.gauge-bg-track {
+  fill: none;
+  stroke: var(--gauge-track);
+  stroke-width: 8;
+}
+
+.gauge-progress-bar {
+  fill: none;
+  stroke: var(--neutral-accent);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 314.159;
+  transition: stroke-dashoffset 0.8s ease, stroke 0.3s ease;
+}
+
+.gauge-center-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge-percentage {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.gauge-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ==========================================
+   STEP 3 & 4: Weak Points / Recommendations
+   ========================================== */
+.diagnostics-card {
+  padding: 22px 24px;
+}
+
+.count-pill {
+  min-width: 26px;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.pill-red {
+  background-color: var(--kpi-red-bg);
+  color: var(--red-accent);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.pill-green {
+  background-color: var(--kpi-green-bg);
+  color: var(--green-accent);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.diagnostics-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.diagnostics-list li {
+  font-size: 0.87rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.diagnostics-list li::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.list-red li::before {
+  background-color: var(--red-accent);
+  box-shadow: 0 0 8px var(--red-glow);
+}
+
+.list-green li::before {
+  background-color: var(--green-accent);
+  box-shadow: 0 0 8px var(--green-glow);
+}
+
+.diagnostics-list li.empty-item {
+  color: var(--text-muted);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.diagnostics-list li.empty-item::before {
+  background-color: var(--text-muted);
+  box-shadow: none;
+}
+
+/* ==========================================
+   STEP 5: Financial Metrics Chart
+   ========================================== */
+.chart-panel {
+  padding: 18px 22px;
+}
+
+.chart-header {
+  margin-bottom: 12px;
+}
+
+.chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-cyan { background-color: var(--cyan-accent); }
+
+.dot-amber {
+  background-color: var(--amber-accent);
+}
+
+/* Rendered as a small dashed line rather than a solid dot, so the legend
+   itself signals "reference threshold", matching the dashed chart line. */
+.dot-dashed {
+  width: 14px;
+  height: 0;
+  border-radius: 0;
+  border-top: 2px dashed var(--amber-accent);
+  background: none;
+}
+
+.chart-container {
+  width: 100%;
+  height: 165px;
+  position: relative;
+}
+
+.metrics-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-grid line {
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+}
+
+.chart-y-labels text {
+  font-size: 10px;
+  fill: var(--chart-text);
+  text-anchor: end;
+  font-weight: 500;
+}
+
+.chart-x-labels text {
+  font-size: 10px;
+  fill: var(--chart-text);
+  text-anchor: middle;
+  font-weight: 500;
+}
+
+.chart-line-input {
+  fill: none;
+  stroke: var(--cyan-accent);
+  stroke-width: 2.2;
+}
+
+.chart-dot {
+  fill: var(--cyan-accent);
+  stroke: var(--bg-card);
+  stroke-width: 2;
+}
+
+/* Healthy Threshold series — dashed & hollow to read as a diagnostic
+   reference line, visually distinct from the solid "actual value" series. */
+.chart-line-threshold {
+  fill: none;
+  stroke: var(--amber-accent);
+  stroke-width: 1.8;
+  stroke-dasharray: 6 4;
+  opacity: 0.85;
+}
+
+.chart-dot-threshold {
+  fill: var(--bg-card);
+  stroke: var(--amber-accent);
+  stroke-width: 1.8;
+}
+
+/* --- Neutral / empty chart state ----------------------------------
+   Before an analysis has run, the controller leaves the Input Value path,
+   area and dot group empty. These rules make that state read as a
+   deliberate "no data yet" view rather than a broken chart:
+     1. Zero-length paths are hidden outright (d="" can still paint a
+        stray point in some engines).
+     2. The Healthy Threshold reference is dimmed, since it is only a
+        baseline and has nothing to compare against yet.
+     3. An "Awaiting analysis" note is overlaid on the plot area.
+   Everything keys off #chart-points-group being empty, so no extra markup
+   or JS class toggling is needed; the state clears itself the moment the
+   Input Value dots are drawn after a successful analysis. */
+#chart-input-path[d=""],
+#chart-area-path[d=""] {
+  display: none;
+}
+
+.chart-container:has(#chart-points-group:empty) .chart-line-threshold {
+  opacity: 0.4;
+}
+
+.chart-container:has(#chart-points-group:empty) .chart-dot-threshold {
+  opacity: 0.4;
+}
+
+.chart-container:has(#chart-points-group:empty)::after {
+  content: 'Awaiting analysis — enter all 9 values and click “Analyze Company”.';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-muted);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    var(--bg-card) 35%,
+    var(--bg-card) 65%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  opacity: 0.96;
+  pointer-events: none;
+}
+
+/* The legend's Input Value entry is greyed out while no series is drawn. */
+.chart-container:has(#chart-points-group:empty) ~ .chart-disclaimer {
+  opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alert-icon-square.is-loading {
+    animation: none;
+  }
+
+  .gauge-progress-bar {
+    transition: none;
+  }
+}
+
+.chart-disclaimer {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* ==========================================
+   Footer
+   ========================================== */
+.dashboard-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer-left strong {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* ==========================================
+   Theme Toggle (header, top-right, inline — not floating over content)
+   ========================================== */
+.theme-switcher-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 9999px;
+  background: var(--switcher-bg);
+  border: 1px solid var(--switcher-border);
+  flex-shrink: 0;
+}
+
+.theme-pill-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.theme-pill-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.theme-pill-btn:hover {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] #btn-dark-theme {
+  background: #0f172a;
+  color: #f8fafc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] #btn-light-theme {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+/* ==========================================
+   Responsive Breakpoints
+   ========================================== */
+@media (max-width: 640px) {
+  .topbar {
+    padding: 14px 18px;
+  }
+
+  .dashboard-content {
+    padding: 20px 16px 56px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prediction-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  /* Single-column form: fields can take the full row, which gives the
+     example placeholders enough room to show in full. */
+  .form-row input {
+    width: 130px;
+  }
+
+  .chart-container:has(#chart-points-group:empty)::after {
+    font-size: 0.74rem;
+    padding: 0 12px;
+  }
+}

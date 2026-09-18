@@ -1,0 +1,65 @@
+{
+  "model_architecture": "Hybrid Weighted Soft Voting Ensemble",
+  "features": [
+    {
+      "index": 0,
+      "name": "ROA(C) before interest and depreciation before interest"
+    },
+    {
+      "index": 1,
+      "name": "Debt ratio %"
+    },
+    {
+      "index": 2,
+      "name": "Net Income Flag"
+    },
+    {
+      "index": 3,
+      "name": "Current Ratio"
+    },
+    {
+      "index": 4,
+      "name": "Operating Gross Margin"
+    },
+    {
+      "index": 5,
+      "name": "Interest Coverage Ratio (Interest expense to EBIT)"
+    },
+    {
+      "index": 6,
+      "name": "Equity to Liability"
+    },
+    {
+      "index": 7,
+      "name": "Net Income to Total Assets"
+    },
+    {
+      "index": 8,
+      "name": "Cash Flow Per Share"
+    }
+  ],
+  "input_tensor_name": "float_input",
+  "input_shape": [
+    1,
+    9
+  ],
+  "input_dtype": "float32",
+  "output_label_name": "label",
+  "output_probability_name": "probabilities",
+  "output_probability_shape": [
+    1,
+    2
+  ],
+  "ensemble_weights": {
+    "random_forest": 1,
+    "xgboost": 2,
+    "lightgbm": 2
+  },
+  "total_weight": 5,
+  "classification_threshold": 0.55,
+  "models": {
+    "random_forest": "random_forest.onnx",
+    "xgboost": "xgboost.onnx",
+    "lightgbm": "lightgbm.onnx"
+  }
+}
