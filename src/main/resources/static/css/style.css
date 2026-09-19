@@ -278,8 +278,8 @@ button, input {
 
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px 24px;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 
 .form-row {
@@ -883,10 +883,6 @@ button, input {
 
   .dashboard-content {
     padding: 20px 16px 56px;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
   }
 
   .prediction-body {
