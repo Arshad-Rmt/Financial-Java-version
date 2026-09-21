@@ -227,16 +227,6 @@ docker run --rm -p 8080:8080 financial-health-analyzer
 
 The deployed application is available at the [live demo](https://financial-java-version.onrender.com/).
 
-## Screenshots
-
-Add screenshots of the implemented interface here for repository and project-review use:
-
-![Financial Health Analyzer input form](docs/screenshots/input-form.png)
-
-![Financial Health Analyzer analysis result](docs/screenshots/analysis-result.png)
-
-The image paths above are placeholders; no screenshot files are included in the repository tree.
-
 ## Limitations and Disclaimer
 
 - The model outputs are estimates based on the bundled exported models and the nine submitted indicators; they are not a guarantee of a company's future financial condition.
